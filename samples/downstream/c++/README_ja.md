@@ -1,13 +1,13 @@
 Downstream (C++)
 ================
 
-このサンプルコードでは、C++でデバイスコネクターを作成して、文字列をintdashから受信します。
+このサンプルでは、C++でデバイスコネクターを作成して、文字列をintdashから受信します。
 
 ## 前提条件
 
 ### 実行環境
 - intdash Edge 1.15.0 以降
-- [Hello intdash! (c++)](../hello-intdash/README_ja.md) を実行可能（このサンプルコードが受信するデータを、別途送信するために使用します）
+- [Hello intdash! (c++)](../hello-intdash/README_ja.md) を実行可能（このサンプルが受信するデータを、別途送信するために使用します）
 
 ### コンパイル環境
 - 実行環境向けのバイナリをコンパイルできるC++コンパイラ
@@ -76,4 +76,4 @@ Timestamp: 2.110509000, id: abc, data: Hello intdash!
 | `Receive 2 units`      | intdash Edgeがサーバーから受信できた秒間データ数です。                          |
 
 ---
-[^1]: このサンプルコードでは、複数の intdash Edge Agnet を一つのターゲットデバイス上で動作させるために、Agentが使用するファイルのパスは[Hello intdash! (c++)](../hello-intdash/README_ja.md)とは異なるパスになるように設定してあります。
+[^1]: このサンプルでは、複数の intdash Edge Agnet を一つのターゲットデバイス上で動作させるために、Agentが使用するファイルのパスは[Hello intdash! (c++)](../hello-intdash/README_ja.md)とは異なるパスになるように設定してあります。

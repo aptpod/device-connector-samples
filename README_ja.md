@@ -1,7 +1,7 @@
-intdash Edge Agent Sample Codes
-===============================
+Device Connector Samples
+========================
 
-intdash Edge Agent Sample Codes は、 intdash Edge Agnet のユースケース毎のサンプルコード集です。
+Device Connector Samples は、 intdash Edge Agnet のユースケースに合わせた、デバイスコネクターを使用するサンプル集です。
 
 ## 事前準備
 ### インストール
