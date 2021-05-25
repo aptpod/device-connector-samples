@@ -1,13 +1,21 @@
 Device Connector Samples
 ========================
 
-Device Connector Samples は、 intdash Edge Agnet のユースケースに合わせた、デバイスコネクターを使用するサンプル集です。
+本リポジトリは、 intdash Edge Agnet 用のデバイスコネクターのサンプル集です。
 
-## 事前準備
-### インストール
-[intdash Edge Agent デベロッパーガイド](https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf) を参考にインストールしてください。
+デバイスコネクターは、各種デバイスとAgentの間でデータの仲介をするソフトウェアです。
+
+本リポジトリには、用途（送信用か受信用か）、使用するデータタイプ、実装言語が異なるいくつかのデバイスコネクターを収録しています。
+
+## サンプルを使用するための事前準備
+
+本リポジトリに収録されているデバイスコネクターのサンプルを使用するには、intdash Edgeが必要です。
+
+intdash Edge を使用するために必要な環境や、インストール方法、設定方法については、 [intdash Edge Agent デベロッパーガイド](https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf) を参照してください。
 
 ## サンプルコード
+
+本リポジトリに収録されているサンプルは以下のとおりです。
 
 | タイトル               | 概要                                                | Python | C++ | bash |
 |:----------------------|:---------------------------------------------------|:------:|:---:|:----:|
