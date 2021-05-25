@@ -1,3 +1,4 @@
+#include <endian.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <signal.h>
@@ -92,8 +93,8 @@ parse_msg(std::vector<unsigned char> &pool, StringMessage &msg, std::string &err
     // Time Sec & Nsec
     //
 
-    memcpy(&msg.sec, &pool[4], 4);
-    memcpy(&msg.nsec, &pool[8], 4);
+    msg.sec = le32toh(*(unsigned int *)(&pool[4]));
+    msg.nsec = le32toh(*(unsigned int *)(&pool[8]));
 
     //
     // DType of String must be 0x1d
