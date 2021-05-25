@@ -34,7 +34,7 @@ Downstream (C++)
 
     このフォルダの manager.conf に、起動するデバイスコネクターのパスを記載します。変更箇所は下記です。
 
-    - loggersオブジェクトの `"path"`: ビルドしたcustomized-loggerのフルパス
+    - loggersオブジェクトの `"path"`: ビルドしたdownstream-connectorのフルパス
 
 4. アップストリームの実行
 
