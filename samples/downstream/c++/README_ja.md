@@ -15,6 +15,8 @@ Downstream (C++)
 - intdash Edge 1.15.0 以降
 - [Hello intdash! (C++)](../hello-intdash/README_ja.md) を実行可能であること（以下の使用手順では、「Hello intdash! (C++)」から送信されたデータをこのサンプル「Downstream (C++)」で受信します。）
 
+以下では、1つのPC上で、送信側と受信側の2つのEdge Agentを起動します。送信側「Hello intdash! (C++)」用と受信側「Downstream (C++)」用の2つのエッジアカウントを用意してください。
+
 ### コンパイル環境
 - 実行環境向けのバイナリをコンパイルできるC++コンパイラ
 
@@ -31,6 +33,8 @@ Downstream (C++)
     - `"host"` : 接続先サーバー（例：dummy.intdash.jp）
     - `"ctlr_id"` : 送信側エッジのUUID（[Hello intdash! (Ｃ++)](../hello-intdash/README_ja.md)で設定した`"my_id"`）
     - `"my_token"` : 受信側エッジのエッジトークン（例：0123456789ABCDEFGHIJ0123456789abcdefghij01234567）
+
+   受信側エッジのUUIDはここでは使用しません。
 
 3. Agent用の設定ファイル（manager.conf）で、使用するデバイスコネクター（downstream-connector）のパスを指定します。設定する箇所は以下のとおりです。
 
