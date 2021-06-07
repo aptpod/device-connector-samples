@@ -34,7 +34,8 @@ static bool
 parse_msg(std::vector<unsigned char> &pool, StringMessage &msg, std::string &err)
 {
     // Parse message
-
+    // See: https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf
+    //
     // +---------------+---------------+---------------+---------------+
     // |    Type(01)   |                    Legnth                     |
     // +---------------+---------------+---------------+---------------+
@@ -51,7 +52,9 @@ parse_msg(std::vector<unsigned char> &pool, StringMessage &msg, std::string &err
 
     err.erase();
 
+    // 1(Type) + 3(Length) + 4(Time Sec) + 4(Time NSec) + 1(DType) + 1(Seq)
     const size_t minimum_msg_size = 1 + 3 + 4 + 4 + 1 + 1;
+    // minimum_msg_size + 1(ID Length)
     const size_t offset_to_id = minimum_msg_size + 1;
 
     // Check size of pool
@@ -62,7 +65,7 @@ parse_msg(std::vector<unsigned char> &pool, StringMessage &msg, std::string &err
     }
 
     //
-    // Type must be 01
+    // Type must be 1 (0x01)
     //
 
     if (pool[0] != 1)
@@ -73,7 +76,7 @@ parse_msg(std::vector<unsigned char> &pool, StringMessage &msg, std::string &err
     }
 
     //
-    // Length from Time Sec to End of Data String
+    // Length from Time Sec to end of Data String
     //
 
     size_t length_from_time_to_end = 0;
@@ -90,14 +93,14 @@ parse_msg(std::vector<unsigned char> &pool, StringMessage &msg, std::string &err
     }
 
     //
-    // Time Sec & Nsec
+    // Time Sec & Time Nsec
     //
 
     msg.sec = le32toh(*(unsigned int *)(&pool[4]));
     msg.nsec = le32toh(*(unsigned int *)(&pool[8]));
 
     //
-    // DType of String must be 0x1d
+    // DType of String must be 29 (0x1D)
     //
 
     if (pool[12] != 0x1d)
@@ -154,7 +157,7 @@ int main(int argc, char *argv[], char *envp[])
         return 1;
     }
 
-    // Read Data
+    // Read data
 
     std::vector<unsigned char> pool;
     while (g_sig_num == 0)
@@ -177,7 +180,7 @@ int main(int argc, char *argv[], char *envp[])
 
         // Read data from FIFO
 
-        unsigned char buf[14]; // 14 is minimum msg size
+        unsigned char buf[minimum_msg_size];
         ssize_t readsize = read(fd, buf, sizeof(buf));
         if (readsize == -1)
         {

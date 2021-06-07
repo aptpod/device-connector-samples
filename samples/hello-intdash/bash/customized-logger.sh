@@ -18,6 +18,7 @@ BINARY_MSG=/var/run/intdash/msg
 for COUNT in $(seq 1 20)
 do
     # Make binary message for String format
+    # See: https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf
     #
     # +---------------+---------------+---------------+---------------+
     # |    Type(01)   |                    Legnth                     |
@@ -32,14 +33,14 @@ do
     # +-----------//--+
 
     #
-    # Type must be 01
+    # Type must be 1 (0x01)
     #
 
     # Make binary msg
     echo -en "\x01" >${BINARY_MSG}
 
     #
-    # Length from Time Sec to End of Data String
+    # Length from Time Sec to end of Data String
     #
 
     # Get Data String length
@@ -49,6 +50,7 @@ do
     ID_LEN=${#ID}
 
     # Calc Length
+    # 4(Time Sec) + 4(Time NSec) + 1(DType) + 1(Seq) + 1(ID Length) + id_len + data_len
     MSG_LEN=$(( 4 + 4 + 1 + 1 + 1 + ${ID_LEN} + ${DATA_LEN} ))
     
     # Change data length to hex string
@@ -74,7 +76,7 @@ do
     echo -en "\x${H_SEC:6:2}\x${H_SEC:4:2}\x${H_SEC:2:2}\x${H_SEC:0:2}" >>${BINARY_MSG}
 
     #
-    # Time Nano Sec
+    # Time NSec
     #
 
     # Extract nsec
@@ -87,7 +89,7 @@ do
     echo -en "\x${H_NSEC:6:2}\x${H_NSEC:4:2}\x${H_NSEC:2:2}\x${H_NSEC:0:2}" >>${BINARY_MSG}
 
     #
-    # DType of String must be 0x1d
+    # DType of String must be 29 (0x1D)
     #
 
     # Append binary msg

@@ -26,6 +26,7 @@ sig_handler(int sig)
 static std::vector<unsigned char> make_msg(const char *id, const char *str)
 {
     // Make binary message for String format
+    // See: https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf
     //
     // +---------------+---------------+---------------+---------------+
     // |    Type(01)   |                    Legnth                     |
@@ -42,14 +43,14 @@ static std::vector<unsigned char> make_msg(const char *id, const char *str)
     std::vector<unsigned char> binary_msg;
 
     //
-    // Type must be 01
+    // Type must be 1 (0x01)
     //
 
     // Make binary msg
     binary_msg.push_back(0x01);
 
     //
-    // Length from Time Sec to End of Data String
+    // Length from Time Sec to end of Data String
     //
 
     // Get Data String length
@@ -59,6 +60,7 @@ static std::vector<unsigned char> make_msg(const char *id, const char *str)
     unsigned char id_len = strlen(id);
 
     // Calc Length
+    // 4(Time Sec) + 4(Time NSec) + 1(DType) + 1(Seq) + 1(ID Length) + id_len + data_len
     size_t msg_len = 4 + 4 + 1 + 1 + 1 + id_len + data_len;
 
     // Append binary msg
@@ -67,7 +69,7 @@ static std::vector<unsigned char> make_msg(const char *id, const char *str)
     binary_msg.push_back((msg_len >> 16) & 0xff);
 
     //
-    // Time Sec & Nsec
+    // Time Sec & Time Nsec
     //
 
     // Get CLOCK_MONOTONIC
@@ -85,7 +87,7 @@ static std::vector<unsigned char> make_msg(const char *id, const char *str)
     binary_msg.push_back((ts.tv_nsec >> 24) & 0xff);
 
     //
-    // DType of String must be 0x1d
+    // DType of String must be 29 (0x1D)
     //
 
     // Append binary msg
@@ -150,7 +152,7 @@ int main(int argc, char *argv[], char *envp[])
         return 1;
     }
 
-    // Write Data
+    // Write data
 
     for (int count = 0; count < 200 && g_sig_num == 0; count++)
     {
