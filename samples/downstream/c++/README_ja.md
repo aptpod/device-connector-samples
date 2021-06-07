@@ -12,7 +12,7 @@ Downstream (C++)
 ## 前提条件
 
 ### 実行環境
-- intdash Edge 1.15.0 以降
+- intdash Edge Agent 1.15.0 以降
 - [Hello intdash! (C++)](../hello-intdash/README_ja.md) を実行可能であること（以下の使用手順では、「Hello intdash! (C++)」から送信されたデータをこのサンプル「Downstream (C++)」で受信します。）
 
 以下では、1つのPC上で、送信側と受信側の2つのEdge Agentを起動します。送信側「Hello intdash! (C++)」用と受信側「Downstream (C++)」用の2つのエッジアカウントを用意してください。
@@ -46,7 +46,7 @@ Downstream (C++)
 
 5. ダウンストリームを実行します。
 
-    以下のコマンドで、intdash Edgeを起動します。その際、設定ファイルとして、手順2～3で準備したmanager.confを指定します。
+    以下のコマンドで、intdash Edge Agentを起動します。その際、設定ファイルとして、手順2～3で準備したmanager.confを指定します。
     <サンプルフォルダーのフルパス> には適切なパスを設定してください。 [^1]
 
     ```
@@ -78,7 +78,7 @@ manager.confに設定されているとおり、以下のすべてに合致す�
 
 | ログメッセージ                                          | 意味                                                                              |
 |:----------------------------------------------------|:----------------------------------------------------------------------------------|
-| `Receive 2 units`      | intdash Edgeがサーバーから受信できた秒間ユニット数です。                          |
+| `Receive 2 units`      | intdash Edge Agentがサーバーから受信できた秒間ユニット数です。                          |
 
 ---
-[^1]: このサンプルでは、複数の intdash Edge Agnet を1つPC上で動作させるため、Agentが使用する設定ファイルのパスは[Hello intdash! (C++)](../hello-intdash/README_ja.md)とは異なるパスにしてあります。
+[^1]: このサンプルでは、複数の intdash Edge Agentを1つPC上で動作させるため、Agentが使用する設定ファイルのパスは[Hello intdash! (C++)](../hello-intdash/README_ja.md)とは異なるパスにしてあります。

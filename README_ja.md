@@ -9,9 +9,9 @@ Device Connector Samples
 
 ## サンプルを使用するための事前準備
 
-本リポジトリに収録されているデバイスコネクターのサンプルを使用するには、intdash Edge が必要です。
+本リポジトリに収録されているデバイスコネクターのサンプルを使用するには、intdash Edge Agentが必要です。
 
-intdash Edge を使用するために必要な環境や、インストール方法、設定方法については、 [intdash Edge Agent デベロッパーガイド](https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf) を参照してください。
+intdash Edge Agentを使用するために必要な環境や、インストール方法、設定方法については、 [intdash Edge Agent デベロッパーガイド](https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf) を参照してください。
 
 ## サンプルコード
 

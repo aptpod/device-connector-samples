@@ -9,7 +9,7 @@ intdash-edge-loggerとこの設定ファイルを使用することにより、U
 ## 前提条件
 
 ### 実行環境
-- intdash Edge 1.15.0 以降
+- intdash Edge Agent1.15.0 以降
 
 ## 使用手順
 
@@ -45,9 +45,9 @@ intdash-edge-loggerとこの設定ファイルを使用することにより、U
     
     - `"path"` : 手順3. で見つかったデバイスパスのフルパス（例：/dev/v4l/by-id/usb-webcam）
 
-5. intdash Edgeを実行します。
+5. intdash Edge Agentを実行します。
 
-    以下のコマンドで、intdash Edgeを起動します。その際、設定ファイルとして、上の手順で変更したmanager.confを指定します。
+    以下のコマンドで、intdash Edge Agentを起動します。その際、設定ファイルとして、上の手順で変更したmanager.confを指定します。
     <サンプルフォルダーのフルパス> には適切なパスを設定してください。
 
     ```
@@ -75,4 +75,4 @@ intdashサーバーに以下のユニットが送信されます。
 | ログメッセージ                                                 | 意味                                                                              |
 |:----------------------------------------------------|:----------------------------------------------------------------------------------|
 | `receive 15 videodata -> 15 -> send 15 videopacket` | intdash-edge-loggerが処理した秒間データ数です。 `receive 0`の場合、データが取得できていません。 |
-| `REALTIME 15 units and 0 basetimes with ID:10`      |intdash Edgeがサーバーにリアルタイムで送信できた秒間ユニット数です（この例の場合、基準時刻以外のユニットが15個、基準時刻のユニットが0個）。|
+| `REALTIME 15 units and 0 basetimes with ID:10`      |intdash Edge Agentがサーバーにリアルタイムで送信できた秒間ユニット数です（この例の場合、基準時刻以外のユニットが15個、基準時刻のユニットが0個）。|
