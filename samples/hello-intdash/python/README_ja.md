@@ -24,16 +24,16 @@ Agentは、受け取ったデータをintdashサーバーに送信します。
     - `"my_id"` : エッジUUID（例：01234567-0123-0123-0123-0123456789AB）。2箇所に同じ値を設定します。
     - `"my_token"` : エッジトークン（例：0123456789ABCDEFGHIJ0123456789abcdefghij01234567）。2箇所に同じ値を設定します。
 
-2. Agent用の設定ファイル（manager.conf）で、デバイスコネクター（customized-logger.py）のパスを指定します。設定する箇所は以下のとおりです。
+2. Agent用の設定ファイル（manager.conf）で、デバイスコネクター（hello-intdash-connector.py）のパスを指定します。設定する箇所は以下のとおりです。
 
-    - loggersオブジェクトの `"path"`: このサンプルフォルダーにあるcustomized-logger.pyのフルパス
+    - loggersオブジェクトの `"path"`: このサンプルフォルダーにあるhello-intdash-connector.pyのフルパス
 
 3. デバイスコネクターのファイルを実行可能にします。
 
     以下のコマンドで、デバイスコネクターのファイルに実行のパーミッションを設定してください。<サンプルフォルダーのフルパス> には適切なパスを指定してください。
 
     ```
-    $ chmod 755 <サンプルフォルダーのフルパス>/customized-logger.py
+    $ chmod 755 <サンプルフォルダーのフルパス>/hello-intdash-connector.py
     ````
 
 4. intdash Edge Agentを実行します。

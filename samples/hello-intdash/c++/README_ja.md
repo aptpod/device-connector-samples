@@ -18,9 +18,9 @@ Agentは、受け取ったデータをintdashサーバーに送信します。
 
 ## 使用手順
 
-1. このサンプルフォルダにある`customized-logger.cpp`を実行環境用のコンパイラでコンパイルします。
+1. このサンプルフォルダにある`hello-intdash-connector.cpp`を実行環境用のコンパイラでコンパイルします。
     ```
-    c++ customized-logger.cpp -o customized-logger
+    c++ hello-intdash-connector.cpp -o hello-intdash-connector
     ``` 
     （c++は対象のコンパイラに置き換えてください）
 
@@ -32,9 +32,9 @@ Agentは、受け取ったデータをintdashサーバーに送信します。
     - `"my_id"` : エッジUUID（例：01234567-0123-0123-0123-0123456789AB）。2箇所に同じ値を設定します。
     - `"my_token"` : エッジトークン（例：0123456789ABCDEFGHIJ0123456789abcdefghij01234567）。2箇所に同じ値を設定します。
 
-3. Agent用の設定ファイル（manager.conf）で、デバイスコネクター（customized-logger）のパスを指定します。設定する箇所は以下のとおりです。
+3. Agent用の設定ファイル（manager.conf）で、デバイスコネクター（hello-intdash-connector）のパスを指定します。設定する箇所は以下のとおりです。
 
-    - loggersオブジェクトの `"path"`: ビルドしたcustomized-loggerのフルパス
+    - loggersオブジェクトの `"path"`: ビルドしたhello-intdash-connectorのフルパス
 
 4. intdash Edge Agentを実行します。
 
