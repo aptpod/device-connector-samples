@@ -53,7 +53,7 @@ parse_msg(std::vector<unsigned char> &pool, StringMessage &msg, std::string &err
     err.erase();
 
     // 1(Type) + 3(Length) + 4(Time Sec) + 4(Time NSec) + 1(DType) + 1(Seq)
-    const size_t minimum_msg_size = 1 + 3 + 4 + 4 + 1 + 1;
+    const size_t minimum_msg_size = 1 + 3 + 4 + 4 + 1 + 1; // 14
     // minimum_msg_size + 1(ID Length)
     const size_t offset_to_id = minimum_msg_size + 1;
 
@@ -183,7 +183,7 @@ int main(int argc, char *argv[], char *envp[])
 
         // Read data from FIFO
 
-        unsigned char buf[minimum_msg_size];
+        unsigned char buf[14]; // 14 = minimum_msg_size
         ssize_t readsize = read(fd, buf, sizeof(buf));
         if (readsize == -1)
         {
