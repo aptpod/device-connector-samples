@@ -90,8 +90,9 @@ do
 
     #
     # DType of String must be 29 (0x1D)
+    #
     # NOTE:
-    #   Please note that intdash Edge Agent's DType of String (29, 0x1D)
+    #   intdash Edge Agent's DType of String (29, 0x1D)
     #   and intdash's Data Type of String (10, 0x0A) are different.
     #
 
