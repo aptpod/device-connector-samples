@@ -24,6 +24,7 @@ class Fifo:
     def SendString(self, id, data):
 
         # Make binary message for String format
+        # See: https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf
         #
         # +---------------+---------------+---------------+---------------+
         # |    Type(01)   |                    Legnth                     |
@@ -38,14 +39,14 @@ class Fifo:
         # +-----------//--+
 
         #
-        # Type must be 01
+        # Type must be 1 (0x01)
         #
 
         # Make binary msg
         self.fifo.write(bytearray([1]))
 
         #
-        # Length from Time Sec to End of Data String
+        # Length from Time Sec to end of Data String
         #
 
         # Get Data String length
@@ -57,13 +58,14 @@ class Fifo:
         id_len = len(id_bytes)
 
         # Calc Length
+        # 4(Time Sec) + 4(Time NSec) + 1(DType) + 1(Seq) + 1(ID Length) + id_len + data_len
         msg_len = 4 + 4 + 1 + 1 + 1 + id_len + data_len
 
         # Append binary msg
         self.fifo.write(msg_len.to_bytes(4, 'little')[0:3])
 
         #
-        # Time Sec & Nsec
+        # Time Sec & Time Nsec
         #
 
         # Get CLOCK_MONOTONIC
@@ -76,7 +78,10 @@ class Fifo:
         self.fifo.write(nsec.to_bytes(4, 'little'))
 
         #
-        # DType of String must be 29
+        # DType of String must be 29 (0x1D)
+        # NOTE:
+        #   intdash Edge Agent's DType of String (29, 0x1D)
+        #   and intdash's Data Type of String (10, 0x0A) are different.
         #
 
         # Append binary msg
@@ -130,7 +135,7 @@ if __name__ == '__main__':
 
     fifo = Fifo(FIFO_LGR2MNG)
 
-    # Write Data
+    # Write data
 
     for i in range(20):
         fifo.SendString(ID, DATA)
