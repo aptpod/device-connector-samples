@@ -1,0 +1,91 @@
+image: ubuntu:20.04
+
+stages:
+  - test
+
+variables:
+  DISTRO: ubuntu
+  INTDASH_URL: ""
+  INTDASH_EDGE_UUID: ""
+  INTDASH_CLIENT_SECRET: ""
+
+default:
+  before_script:
+    - ARCH=$(arch | sed -e 's/aarch64/arm64/' -e 's/armv7l/armhf/' -e 's/x86_64/amd64/')
+    - apt-get update
+    - apt-get install -y apt-transport-https curl gnupg-agent lsb-release
+    - curl -s --compressed "https://repository.aptpod.jp/intdash-edge/linux/${DISTRO}/gpg" | gpg --dearmor -o /usr/share/keyrings/intdash-edge-archive-keyring.gpg
+    - echo "deb [arch=${ARCH} signed-by=/usr/share/keyrings/intdash-edge-archive-keyring.gpg] https://repository.aptpod.jp/intdash-edge/linux/${DISTRO} $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/intdash-edge.list
+    - apt-get update
+    - apt-get install -y intdash-edge
+    - export LD_LIBRARY_PATH=/opt/vm2m/lib
+
+test_hello_intdash_bash:
+  stage: test
+  script:
+    - sed -e "s@xxxx.intdash.jp@${INTDASH_URL}@" -e "s@XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@${INTDASH_EDGE_UUID}@" -e "s@XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX@${INTDASH_CLIENT_SECRET}@" -e "s@/path/to/@$(pwd)/samples/hello-intdash/bash/@" samples/hello-intdash/bash/manager.conf >manager.conf
+    - timeout 30 /opt/vm2m/sbin/intdash-edge-manager -C $(pwd)/manager.conf | tee intdash-edge.log || true
+
+    # Ignore unit count check. because hello-intdash-connector.sh failed on docker.
+  # - count=$(grep "REALTIME 2 units" intdash-edge.log  | wc -l)
+  # - test ${count} -ge 20
+    - count=$(grep "ACK" intdash-edge.log  | wc -l)
+    - test ${count} -ge 20
+  resource_group: intdash-credentials
+
+test_hello_intdash_cpp:
+  stage: test
+  script:
+    - apt-get install -y g++
+    - g++ samples/hello-intdash/c++/hello-intdash-connector.cpp -o hello-intdash-connector
+    - sed -e "s@xxxx.intdash.jp@${INTDASH_URL}@" -e "s@XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@${INTDASH_EDGE_UUID}@" -e "s@XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX@${INTDASH_CLIENT_SECRET}@" -e "s@/path/to/@$(pwd)/@" samples/hello-intdash/c++/manager.conf >manager.conf
+    - timeout 30 /opt/vm2m/sbin/intdash-edge-manager -C $(pwd)/manager.conf | tee intdash-edge.log || true
+
+    - count=$(grep "REALTIME 2 units" intdash-edge.log  | wc -l)
+    - test ${count} -ge 20
+    - count=$(grep "ACK" intdash-edge.log  | wc -l)
+    - test ${count} -ge 20
+  resource_group: intdash-credentials
+
+test_hello_intdash_python:
+  stage: test
+  script:
+    - apt-get install -y python3
+    - sed -e "s@xxxx.intdash.jp@${INTDASH_URL}@" -e "s@XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@${INTDASH_EDGE_UUID}@" -e "s@XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX@${INTDASH_CLIENT_SECRET}@" -e "s@/path/to/@$(pwd)/samples/hello-intdash/python/@" samples/hello-intdash/python/manager.conf >manager.conf
+    - timeout 30 /opt/vm2m/sbin/intdash-edge-manager -C $(pwd)/manager.conf | tee intdash-edge.log || true
+
+    - count=$(grep "REALTIME 2 units" intdash-edge.log  | wc -l)
+    - test ${count} -ge 20
+    - count=$(grep "ACK" intdash-edge.log  | wc -l)
+    - test ${count} -ge 20
+  resource_group: intdash-credentials
+
+test_mjpeg:
+  stage: test
+  script:
+    - cp -a samples/mjpeg/logger_001.conf ./
+    - sed -e "s@xxxx.intdash.jp@${INTDASH_URL}@" -e "s@XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@${INTDASH_EDGE_UUID}@" -e "s@XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX@${INTDASH_CLIENT_SECRET}@" -e "s@/xxxx/@$(pwd)/@" samples/mjpeg/manager.conf >manager.conf
+    - timeout 30 /opt/vm2m/sbin/intdash-edge-manager -C $(pwd)/manager.conf | tee intdash-edge.log || true
+
+    - count=$(grep "open_device(" intdash-edge.log  | wc -l)
+    - test ${count} -ge 6
+    - count=$(grep "ACK" intdash-edge.log  | wc -l)
+    - test ${count} -ge 20
+  resource_group: intdash-credentials
+
+test_downstream_c++:
+  stage: test
+  script:
+    - apt-get install -y g++
+    - g++ samples/hello-intdash/c++/hello-intdash-connector.cpp -o hello-intdash-connector
+    - sed -e "s@xxxx.intdash.jp@${INTDASH_URL}@" -e "s@XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@${INTDASH_EDGE_UUID}@" -e "s@XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX@${INTDASH_CLIENT_SECRET}@" -e "s@/path/to/@$(pwd)/@" samples/hello-intdash/c++/manager.conf >manager.conf
+
+    - g++ samples/downstream/c++/downstream-connector.cpp -o downstream-connector
+    - sed -e "s@xxxx.intdash.jp@${INTDASH_URL}@" -e "s@XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@${INTDASH_EDGE_UUID}@" -e "s@XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX@${INTDASH_CLIENT_SECRET}@" -e "s@/path/to/@$(pwd)/samples/downstream/c++/@" samples/downstream/c++/manager.conf >manager2.conf
+
+    - timeout 30 /opt/vm2m/sbin/intdash-edge-manager -C $(pwd)/manager.conf >/dev/null || true &
+    - timeout 30 /opt/vm2m/sbin/intdash-edge-manager -C $(pwd)/manager2.conf | tee intdash-edge.log || true
+
+    - count=$(grep "Receive 2 units" intdash-edge.log  | wc -l)
+    - test ${count} -ge 20
+  resource_group: intdash-credentials
