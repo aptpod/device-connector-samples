@@ -11,7 +11,7 @@ Agentは、受け取ったデータをintdashサーバーに送信します。
 ## 前提条件
 
 ### 実行環境
-- intdash Edge Agent 1.15.0 以降
+- intdash Edge Agent 1.19.0 以降
 - bash
 
 ## 使用手順
@@ -22,7 +22,7 @@ Agentは、受け取ったデータをintdashサーバーに送信します。
     
     - `"host"` : 接続先サーバー（例：dummy.intdash.jp）。2箇所に同じ値を設定します。
     - `"my_id"` : エッジUUID（例：01234567-0123-0123-0123-0123456789AB）。2箇所に同じ値を設定します。
-    - `"my_token"` : エッジトークン（例：0123456789ABCDEFGHIJ0123456789abcdefghij01234567）。2箇所に同じ値を設定します。
+    - `"my_secret"` : クライアントシークレット（例：0123456789ABCDEFGHIJ0123456789abcdefghij0123456789ABCDEFGHIJ0123）。2箇所に同じ値を設定します。
 
 2. Agent用の設定ファイル（manager.conf）で、デバイスコネクター（hello-intdash-connector.sh）のパスを指定します。設定する箇所は以下のとおりです。
 
