@@ -11,11 +11,7 @@ FIFO_MNG2LGR="/var/run/intdash/logger_100.rx"
 BINARY_MSG=/var/run/intdash/msg
 
 
-#
-# Send 10x2 times at a frequency of 500 [msec].
-#
-
-for COUNT in $(seq 1 20)
+while true
 do
     # Make binary message for String format
     # See: https://docs.intdash.jp/manual/intdash-agent-developer-guide/latest/ja/intdash-agent-developer-guide-ja.pdf
@@ -137,13 +133,5 @@ do
 
     cat ${BINARY_MSG} >>${FIFO_LGR2MNG}
 
-    sleep 0.5
-done
-
-#
-# Waiting for signal
-#
-while true
-do
     sleep 0.5
 done

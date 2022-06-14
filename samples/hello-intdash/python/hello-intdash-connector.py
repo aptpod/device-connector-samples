@@ -137,13 +137,8 @@ if __name__ == '__main__':
 
     # Write data
 
-    for i in range(20):
+    while SIGNUM == 0:
         fifo.SendString(ID, DATA)
         time.sleep(0.5)
         if SIGNUM != 0:
             break
-
-    # Waiting for signal
-
-    while SIGNUM == 0:
-        time.sleep(0.5)

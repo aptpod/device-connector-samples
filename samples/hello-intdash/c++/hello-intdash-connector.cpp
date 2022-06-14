@@ -157,7 +157,7 @@ int main(int argc, char *argv[], char *envp[])
 
     // Write data
 
-    for (int count = 0; count < 200 && g_sig_num == 0; count++)
+    while (g_sig_num == 0)
     {
         std::vector<unsigned char> msg = make_msg(ID, DATA);
 
@@ -179,13 +179,6 @@ int main(int argc, char *argv[], char *envp[])
     // Close FIFO
 
     close(fd);
-
-    // Waiting for signal
-
-    while (g_sig_num == 0)
-    {
-        usleep(500 * 1000);
-    }
 
     return 0;
 }
