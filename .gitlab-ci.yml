@@ -89,3 +89,18 @@ test_downstream_c++:
     - count=$(grep "Receive 2 units" /var/log/intdash-edge.log  | wc -l)
     - test ${count} -ge 20
   resource_group: intdash-credentials
+
+test_downstream_python:
+  stage: test
+  script:
+    - apt-get install -y python3
+    - sed -e "s@xxxx.intdash.jp@${INTDASH_URL}@" -e "s@XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@${INTDASH_EDGE_UUID}@" -e "s@XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX@${INTDASH_CLIENT_SECRET}@" -e "s@/path/to/@$(pwd)/samples/hello-intdash/python/@" samples/hello-intdash/python/manager.conf >manager.conf
+
+    - sed -e "s@xxxx.intdash.jp@${INTDASH_URL}@" -e "s@XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@${INTDASH_EDGE_UUID}@" -e "s@XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX@${INTDASH_CLIENT_SECRET}@" -e "s@/path/to/@$(pwd)/samples/downstream/python/@" samples/downstream/python/manager.conf >manager2.conf
+
+    - timeout 30 /opt/vm2m/sbin/intdash-edge-manager -C $(pwd)/manager.conf >/dev/null || true &
+    - timeout 30 /opt/vm2m/sbin/intdash-edge-manager -C $(pwd)/manager2.conf | tee /var/log/intdash-edge.log || true
+
+    - count=$(grep "Receive 2 units" /var/log/intdash-edge.log  | wc -l)
+    - test ${count} -ge 20
+  resource_group: intdash-credentials
