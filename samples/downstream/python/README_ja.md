@@ -47,7 +47,7 @@ Downstream (Python)
 
 5. 実行
 
-    下記コマンドの <サンプルフォルダのフルパス> に適切なパスを設定し実行してください。
+    下記コマンドの <サンプルフォルダのフルパス> に適切なパスを設定し実行してください。 [^1]
 
     ```
     $ sudo LD_LIBRARY_PATH=/opt/vm2m/lib /opt/vm2m/sbin/intdash-edge-manager -C <サンプルフォルダのフルパス>/manager.conf -p /var/run/intdash-edge-manager2.pid
