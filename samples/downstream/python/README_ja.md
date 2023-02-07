@@ -13,7 +13,7 @@ Downstream! (Python)
 ### 実行環境
 - intdash Edge Agent 1.20.0 以降
 - Python3
-- [Hello intdash! (Python)](../hello-intdash/README_ja.md) を実行可能であること（以下の使用手順では、「Hello intdash! (Python)」から送信されたデータをこのサンプル「Downstream (Python)」で受信します。）
+- [Hello intdash! (Python)](../../hello-intdash/python/README_ja.md) を実行可能であること（以下の使用手順では、「Hello intdash! (Python)」から送信されたデータをこのサンプル「Downstream (Python)」で受信します。）
 
 
 ## 手順
@@ -25,7 +25,7 @@ Downstream! (Python)
     - `"host"` : 接続先サーバー（例：dummy.intdash.jp）
     - `"my_id"` : 受信側エッジのエッジUUID（例：01234567-0123-0123-0123-0123456789AB）。
     - `"my_secret"` : 受信側エッジのクライアントシークレット（例：0123456789ABCDEFGHIJ0123456789abcdefghij0123456789ABCDEFGHIJ0123）
-    - `"ctlr_id"` : 送信元エッジID（[Hello intdash! (python)](../hello-intdash/README_ja.md)で設定した`"my_id"`のID）
+    - `"ctlr_id"` : 送信元エッジID（[Hello intdash! (python)](../../hello-intdash/python/README_ja.md)で設定した`"my_id"`のID）
 
 2. 設定ファイルにデバイスコネクターのパスを書き込む
 
@@ -43,7 +43,7 @@ Downstream! (Python)
 
 4. アップストリームの実行
 
-    [Hello intdash! (python)](../hello-intdash/README_ja.md) を実行してください。
+    [Hello intdash! (python)](../../hello-intdash/python/README_ja.md) を実行してください。
 
 5. 実行
 
@@ -80,4 +80,4 @@ manager.confに設定されているとおり、以下のすべてに合致す�
 | `Receive 2 units`      | intdash Edgeがサーバーから受信できた秒間データ数です。                          |
 
 ---
-[^1]: このサンプルでは、複数の intdash Edge Agnet を一つのターゲットデバイス上で動作させるために、Agentが使用するファイルのパスは[Hello intdash! (python)](../hello-intdash/README_ja.md)とは異なるパスになるように設定してあります。
+[^1]: このサンプルでは、複数の intdash Edge Agnet を一つのターゲットデバイス上で動作させるために、Agentが使用するファイルのパスは[Hello intdash! (python)](../../hello-intdash/python/README_ja.md)とは異なるパスになるように設定してあります。
