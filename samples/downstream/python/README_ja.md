@@ -15,8 +15,9 @@ Downstream (Python)
 - Python3
 - [Hello intdash! (Python)](../../hello-intdash/python/README_ja.md) を実行可能であること（以下の使用手順では、「Hello intdash! (Python)」から送信されたデータをこのサンプル「Downstream (Python)」で受信します。）
 
+以下では、1つのPC上で、送信側と受信側の2つのEdge Agentを起動します。送信側「Hello intdash! (C++)」用と受信側「Downstream (C++)」用の2つのエッジアカウントを用意してください。
 
-## 手順
+## 使用手順
 
 1. 設定ファイルに接続先の情報を書き込む
 
@@ -41,11 +42,11 @@ Downstream (Python)
     $ chmod 755 <サンプルフォルダのフルパス>/downstream-connector.py
     ````
 
-4. アップストリームの実行
+4. アップストリームする intdash Edge Agent を実行
 
     [Hello intdash! (python)](../../hello-intdash/python/README_ja.md) を実行してください。
 
-5. 実行
+5. ダウンストリームする intdash Edge Agent を実行
 
     下記コマンドの <サンプルフォルダのフルパス> に適切なパスを設定し実行してください。 [^1]
 
