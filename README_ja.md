@@ -20,7 +20,7 @@ intdash Edge Agentを使用するために必要な環境や、インストー�
 | タイトル               | 概要                                                | Python | C++ | bash | 設定ファイル |
 |:----------------------|:---------------------------------------------------|:------:|:------:|:---:|:----:|
 | Hello intdash!     | intdashサーバーにデータを送信する場合のデバイスコネクターのサンプルです。文字列を生成してintdashサーバーに送信します。| [o](samples/hello-intdash/python) | [o](samples/hello-intdash/c++) | [o](samples/hello-intdash/bash) | - |
-| Downstream         | intdashサーバーからデータを受信する場合のデバイスコネクターのサンプルです。intdashサーバーから受信した文字列を標準出力に出力します。| - | [o](samples/downstream/c++) | - | - |
+| Downstream         | intdashサーバーからデータを受信する場合のデバイスコネクターのサンプルです。intdashサーバーから受信した文字列を標準出力に出力します。| [o](samples/downstream/python) | [o](samples/downstream/c++) | - | - |
 | Motion JPEG | プリセットのデバイスコネクターを使用するための設定ファイルのサンプルです。UVCデバイスからMotion JPEGを取得し、intdashサーバーに送信します。 | - | - | - | [o](samples/mjpeg) |
 
 
